@@ -6,7 +6,7 @@ import rx.schedulers.TestScheduler;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public final class Rx2IdlerTest {
+public final class RxIdlerTest {
   @Test public void nullWrapArgumentsFails() {
     try {
       RxIdler.wrap(null, "Bob");
