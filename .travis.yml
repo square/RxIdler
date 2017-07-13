@@ -1,4 +1,13 @@
-language: java
+language: android
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-26.0.0
+    - android-26
+    - extra-android-support
+    - extra-android-m2repository
 
 jdk:
   - oraclejdk8
@@ -19,3 +28,8 @@ notifications:
   email: false
 
 sudo: false
+
+cache:
+  directories:
+       - $HOME/.gradle
+       - $HOME/.m2
