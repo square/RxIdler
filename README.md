@@ -27,8 +27,7 @@ This code is most frequently put in a custom test runner's `onStart()` method:
 ```java
 public final class MyTestRunner extends AndroidJUnitRunner {
   @Override public void onStart() {
-    RxJavaPlugins.setInitComputationSchedulerHandler(
-        Rx2Idler.create("RxJava 2.x Computation Scheduler"));
+    RxJavaPlugins.getInstance().registerSchedulersHook(RxIdler.hooks());
     // etc...
     
     super.onStart();
