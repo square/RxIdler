@@ -53,6 +53,23 @@ Espresso.registerIdlingResources(wrapped);
 // Use 'wrapped' now instead of 'myScheduler'...
 ```
 
+Proguard
+--------
+
+If you use Proguard on Espresso test builds, you may need to add the following rules into your proguard configuration.
+
+
+RxJava 2.x:
+```
+-keep public class io.reactivex.plugins.RxJavaPlugins { *; }
+-keep public class io.reactivex.disposables.CompositeDisposable { *; }
+```
+
+RxJava 1.x:
+```
+-keep public class rx.plugins.RxJavaPlugins { *; }
+-keep public class rx.subscriptions.CompositeSubscription { *; }
+```
 
 Download
 --------
