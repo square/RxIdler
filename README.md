@@ -9,16 +9,18 @@ Usage
 
 Set the wrapping functions as the delegate for handling scheduler initialization to RxJava:
 
-RxJava 2.x:
-```java
-RxJavaPlugins.setInitComputationSchedulerHandler(
-    Rx2Idler.create("RxJava 2.x Computation Scheduler"));
-```
+ *  RxJava 2.x:
+ 
+    ```java
+    RxJavaPlugins.setInitComputationSchedulerHandler(
+        Rx2Idler.create("RxJava 2.x Computation Scheduler"));
+    ```
 
-RxJava 1.x:
-```java
-RxJavaPlugins.getInstance().registerSchedulersHook(RxIdler.hooks());
-```
+ *  RxJava 1.x:
+    
+    ```java
+    RxJavaPlugins.getInstance().registerSchedulersHook(RxIdler.hooks());
+    ```
 
 When that `Scheduler` is first accessed via `Schedulers`, the RxIdler function will wrap it with an
 Espresso `IdlingResource` and side-effect by registering it to the `Espresso` class.
@@ -39,39 +41,40 @@ public final class MyTestRunner extends AndroidJUnitRunner {
 If you have custom `Scheduler` implementations you can wrap them directly and then register them
 with Espresso:
 
-RxJava 2.x:
-```java
-IdlingResourceScheduler wrapped = Rx2Idler.wrap(myScheduler, "My Scheduler");
-Espresso.registerIdlingResources(wrapped);
-// Use 'wrapped' now instead of 'myScheduler'...
-```
+ *  RxJava 2.x:
 
-RxJava 1.x:
-```java
-IdlingResourceScheduler wrapped = RxIdler.wrap(myScheduler, "My Scheduler");
-Espresso.registerIdlingResources(wrapped);
-// Use 'wrapped' now instead of 'myScheduler'...
-```
+    ```java
+    IdlingResourceScheduler wrapped = Rx2Idler.wrap(myScheduler, "My Scheduler");
+    Espresso.registerIdlingResources(wrapped);
+    // Use 'wrapped' now instead of 'myScheduler'...
+    ```
+
+ *  RxJava 1.x:
+    ```java
+    IdlingResourceScheduler wrapped = RxIdler.wrap(myScheduler, "My Scheduler");
+    Espresso.registerIdlingResources(wrapped);
+    // Use 'wrapped' now instead of 'myScheduler'...
+    ```
 
 
 Download
 --------
 
-RxJava 2.x:
+ *  RxJava 2.x:
 
-```groovy
-dependencies {
-  androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.0'
-}
-```
+    ```groovy
+    dependencies {
+      androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.0'
+    }
+    ```
 
-RxJava 1.x:
+ *  RxJava 1.x:
 
-```groovy
-dependencies {
-  androidTestImplementation 'com.squareup.rx.idler:rx1-idler:0.9.0'
-}
-```
+    ```groovy
+    dependencies {
+      androidTestImplementation 'com.squareup.rx.idler:rx1-idler:0.9.0'
+    }
+    ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
