@@ -79,6 +79,25 @@ Download
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 
+ProGuard
+--------
+
+If you use ProGuard on Espresso test builds, you may need to add the following rules into your ProGuard configuration.
+
+
+RxJava 2.x:
+```
+-keep class io.reactivex.plugins.RxJavaPlugins { *; }
+-keep class io.reactivex.disposables.CompositeDisposable { *; }
+```
+
+RxJava 1.x:
+```
+-keep class rx.plugins.RxJavaPlugins { *; }
+-keep class rx.subscriptions.CompositeSubscription { *; }
+```
+
+
 License
 -------
 
