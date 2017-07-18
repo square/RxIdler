@@ -1,7 +1,16 @@
-language: java
+language: android
+
+android:
+  components:
+    - tools
+    - platform-tools
 
 jdk:
   - oraclejdk8
+
+before_script:
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
 
 after_success:
   - .buildscript/deploy_snapshot.sh
@@ -19,3 +28,8 @@ notifications:
   email: false
 
 sudo: false
+
+cache:
+  directories:
+    - $HOME/.gradle
+    - $HOME/.m2
