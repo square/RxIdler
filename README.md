@@ -56,6 +56,16 @@ with Espresso:
     // Use 'wrapped' now instead of 'myScheduler'...
     ```
 
+Sample
+--------
+
+ See the sample app in `/sample` :
+ 
+ * `RxJavaTestRunner` custom test runner which sets up RxIdler
+ * `UserManager` contains long running Rx operations
+ * `MainActivity` subscribes to long running Rx operations
+ * `MainActivityInstrumentedTest` tests `MainActivity` and idles for long running Rx operations.
+
 
 Download
 --------

@@ -1,2 +1,2 @@
-include ':rx1-idler'
+include ':rx1-idler', ':sample'
 include ':rx2-idler'
