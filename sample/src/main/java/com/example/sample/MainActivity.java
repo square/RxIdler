@@ -2,7 +2,6 @@ package com.example.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -14,8 +13,6 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
 
     private UserManager userManager;
     private TextView usersTextView;
@@ -35,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         rxButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "button clicked");
                 usersTextView.setText(""); // clear
                 progressBar.setVisibility(View.VISIBLE);
                 userManager.getUser()
@@ -45,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void call(User user) {
                                 progressBar.setVisibility(View.INVISIBLE);
-                                usersTextView.setText(String.format("rxjava: %s %s", user.getFirstName(), user
-                                        .getLastName()));
+                                usersTextView.setText(
+                                        String.format("rxjava: %s %s", user.getFirstName(), user.getLastName()));
                             }
                         });
             }
@@ -56,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         rx2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "button clicked");
                 usersTextView.setText(""); // clear
                 progressBar.setVisibility(View.VISIBLE);
                 userManager.getUsersRx2()
@@ -66,13 +61,11 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void accept(User user) throws Exception {
                                 progressBar.setVisibility(View.INVISIBLE);
-                                usersTextView.setText(String.format("rxjava2: %s %s", user.getFirstName(), user
-                                        .getLastName()));
+                                usersTextView.setText(
+                                        String.format("rxjava2: %s %s", user.getFirstName(), user.getLastName()));
                             }
                         });
             }
         });
     }
-
-
 }

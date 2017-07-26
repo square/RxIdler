@@ -1,8 +1,5 @@
 package com.example.sample;
 
-/**
- * Model of a user
- */
 public class User {
 
     private final String firstName;

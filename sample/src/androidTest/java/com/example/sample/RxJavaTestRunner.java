@@ -22,7 +22,6 @@ public class RxJavaTestRunner extends AndroidJUnitRunner {
         io.reactivex.plugins.RxJavaPlugins.setInitNewThreadSchedulerHandler(
                 Rx2Idler.create("RxJava 2.x New Thread Scheduler"));
 
-
         super.onStart();
     }
 }
