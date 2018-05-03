@@ -14,6 +14,9 @@ Set the wrapping functions as the delegate for handling scheduler initialization
     ```java
     RxJavaPlugins.setInitComputationSchedulerHandler(
         Rx2Idler.create("RxJava 2.x Computation Scheduler"));
+    RxJavaPlugins.setInitIoSchedulerHandler(
+        Rx2Idler.create("RxJava 2.x IO Scheduler"));
+    // etc...
     ```
 
  *  RxJava 1.x:
