@@ -2,7 +2,7 @@ package com.squareup.rx2.idler;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
 import io.reactivex.Scheduler;
 import io.reactivex.functions.Function;
@@ -31,7 +31,9 @@ public final class Rx2Idler {
       @Override public Scheduler apply(Callable<Scheduler> delegate) throws Exception {
         IdlingResourceScheduler scheduler =
             new DelegatingIdlingResourceScheduler(delegate.call(), name);
-        Espresso.registerIdlingResources(scheduler);
+        IdlingRegistry
+                .getInstance()
+                .register(scheduler);
         return scheduler;
       }
     };
@@ -39,7 +41,7 @@ public final class Rx2Idler {
 
   /**
    * Wraps the supplied {@link Scheduler} into one which also implements {@link IdlingResource}.
-   * You must {@linkplain Espresso#registerIdlingResources(IdlingResource...) register} the
+   * You must {@linkplain IdlingRegistry#register(IdlingResource...) register} the
    * returned instance with Espresso before it will be used. Only work scheduled on the returned
    * instance directly will be registered.
    */

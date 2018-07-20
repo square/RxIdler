@@ -48,14 +48,18 @@ with Espresso:
 
     ```java
     IdlingResourceScheduler wrapped = Rx2Idler.wrap(myScheduler, "My Scheduler");
-    Espresso.registerIdlingResources(wrapped);
+    IdlingRegistry
+        .getInstance()
+        .register(wrapped);
     // Use 'wrapped' now instead of 'myScheduler'...
     ```
 
  *  RxJava 1.x:
     ```java
     IdlingResourceScheduler wrapped = RxIdler.wrap(myScheduler, "My Scheduler");
-    Espresso.registerIdlingResources(wrapped);
+    IdlingRegistry
+        .getInstance()
+        .register(wrapped);
     // Use 'wrapped' now instead of 'myScheduler'...
     ```
 

@@ -2,7 +2,7 @@ package com.squareup.rx.idler;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
 import rx.Scheduler;
 import rx.plugins.RxJavaSchedulersHook;
@@ -25,7 +25,7 @@ public final class RxIdler {
 
   /**
    * Wraps the supplied {@link Scheduler} into one which also implements {@link IdlingResource}.
-   * You must {@linkplain Espresso#registerIdlingResources(IdlingResource...) register} the
+   * You must {@linkplain IdlingRegistry#register(IdlingResource...) register} the
    * returned instance with Espresso before it will be used. Only work scheduled on the returned
    * instance directly will be registered.
    */
