@@ -64,6 +64,9 @@ with Espresso:
     ```
 
 
+Ensure that you provide unique name for your wrapped schedulers as Espresso will ignore multiple idling
+resources registered with the same name.
+
 Download
 --------
 
