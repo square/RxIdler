@@ -43,7 +43,7 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
         if (disposables.isDisposed()) {
           return Disposables.disposed();
         }
-        ScheduledWork work = createWork(action, 0L);
+        ScheduledWork work = createWork(action, 0L, 0L);
         Disposable disposable = delegateWorker.schedule(work);
         ScheduledWorkDisposable workDisposable = new ScheduledWorkDisposable(work, disposable);
         disposables.add(workDisposable);
@@ -54,7 +54,7 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
         if (disposables.isDisposed()) {
           return Disposables.disposed();
         }
-        ScheduledWork work = createWork(action, delayTime);
+        ScheduledWork work = createWork(action, delayTime, 0L);
         Disposable disposable = delegateWorker.schedule(work, delayTime, unit);
         disposables.add(disposable);
         ScheduledWorkDisposable workDisposable = new ScheduledWorkDisposable(work, disposable);
@@ -68,7 +68,7 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
         if (disposables.isDisposed()) {
           return Disposables.disposed();
         }
-        ScheduledWork work = createWork(action, initialDelay);
+        ScheduledWork work = createWork(action, initialDelay, period);
         Disposable disposable =
             delegateWorker.schedulePeriodically(work, initialDelay, period, unit);
         disposables.add(disposable);
@@ -97,7 +97,7 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
     }
   }
 
-  ScheduledWork createWork(Runnable action, long delay) {
+  ScheduledWork createWork(Runnable action, long delay, long period) {
     if (action instanceof ScheduledWork) {
       // Unwrap any re-scheduled work. We want each scheduler to get its own state machine.
       action = ((ScheduledWork) action).delegate;
@@ -107,21 +107,24 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
       startWork();
     }
     int startingState = immediate ? ScheduledWork.STATE_SCHEDULED : ScheduledWork.STATE_IDLE;
-    return new ScheduledWork(action, startingState);
+    return new ScheduledWork(action, startingState, period > 0L);
   }
 
   final class ScheduledWork extends AtomicInteger implements Runnable {
     static final int STATE_IDLE = 0; // --> STATE_RUNNING, STATE_DISPOSED
     static final int STATE_SCHEDULED = 1; // --> STATE_RUNNING, STATE_DISPOSED
-    static final int STATE_RUNNING = 2; // --> STATE_COMPLETED, STATE_DISPOSED
+    static final int STATE_RUNNING = 2; // --> STATE_IDLE, STATE_COMPLETED, STATE_DISPOSED
     static final int STATE_COMPLETED = 3; // --> STATE_DISPOSED
     static final int STATE_DISPOSED = 4;
 
     final Runnable delegate;
 
-    ScheduledWork(Runnable delegate, int startingState) {
+    private final boolean isPeriodic;
+
+    ScheduledWork(Runnable delegate, int startingState, boolean isPeriodic) {
       super(startingState);
       this.delegate = delegate;
+      this.isPeriodic = isPeriodic;
     }
 
     @Override public void run() {
@@ -137,8 +140,8 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
               try {
                 delegate.run();
               } finally {
-                // Complete with a CAS to ensure we don't overwrite a disposed state.
-                compareAndSet(STATE_RUNNING, STATE_COMPLETED);
+                // Change state with a CAS to ensure we don't overwrite a disposed state.
+                compareAndSet(STATE_RUNNING, isPeriodic ? STATE_IDLE : STATE_COMPLETED);
                 stopWork();
               }
               return; // CAS success, we're done.
