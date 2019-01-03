@@ -81,6 +81,8 @@ public final class DelegatingIdlingResourceSchedulerTest {
     assertEquals(1, action.count());
     delegate.advanceTimeBy(500, MILLISECONDS);
     assertIdle(1);
+    delegate.advanceTimeBy(1000, MILLISECONDS);
+    assertIdle(2);
   }
 
   @Test public void runningWorkReportsBusy() {
