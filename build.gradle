@@ -1,8 +1,7 @@
 buildscript {
   ext.versions = [
       'minSdk': 8,
-      'compileSdk': 26,
-      'buildTools': '26.0.0',
+      'compileSdk': 28,
   ]
 
   ext.deps = [
@@ -14,11 +13,12 @@ buildscript {
   ]
 
   dependencies {
-    classpath "com.android.tools.build:gradle:2.3.3"
+    classpath 'com.android.tools.build:gradle:3.2.1'
   }
 
   repositories {
-    jcenter()
+    mavenCentral()
+    google()
   }
 }
 
@@ -26,6 +26,7 @@ subprojects {
   repositories {
     mavenCentral()
     google()
+    jcenter()
   }
 
   group = GROUP

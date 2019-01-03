@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
   compileSdkVersion versions.compileSdk
-  buildToolsVersion versions.buildTools
 
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_7
@@ -22,10 +21,10 @@ android {
 }
 
 dependencies {
-  compile deps.annotations
-  compile deps.rx2
-  compile deps.espresso
-  testCompile deps.junit
+  api deps.annotations
+  api deps.rx2
+  api deps.espresso
+  testImplementation deps.junit
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
