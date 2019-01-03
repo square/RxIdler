@@ -67,7 +67,7 @@ Download
 
     ```groovy
     dependencies {
-      androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.0'
+      androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.1'
     }
     ```
 
@@ -75,7 +75,7 @@ Download
 
     ```groovy
     dependencies {
-      androidTestImplementation 'com.squareup.rx.idler:rx1-idler:0.9.0'
+      androidTestImplementation 'com.squareup.rx.idler:rx1-idler:0.9.1'
     }
     ```
 
