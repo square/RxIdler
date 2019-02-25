@@ -1,6 +1,6 @@
 package com.squareup.rx2.idler;
 
-import android.support.test.espresso.IdlingResource;
+import androidx.test.espresso.IdlingResource;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.TestScheduler;
 import java.util.concurrent.atomic.AtomicInteger;

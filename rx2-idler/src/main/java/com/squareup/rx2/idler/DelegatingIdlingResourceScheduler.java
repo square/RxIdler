@@ -1,6 +1,6 @@
 package com.squareup.rx2.idler;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposables;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 @RestrictTo(LIBRARY)
 final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
