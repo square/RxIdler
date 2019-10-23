@@ -1,6 +1,6 @@
 package com.squareup.rx.idler;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import rx.Scheduler;
@@ -9,7 +9,7 @@ import rx.functions.Action0;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 @RestrictTo(LIBRARY)
 final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {

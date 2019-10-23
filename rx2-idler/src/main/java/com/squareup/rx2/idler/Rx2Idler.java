@@ -1,9 +1,9 @@
 package com.squareup.rx2.idler;
 
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.IdlingResource;
+import androidx.annotation.CheckResult;
+import androidx.annotation.NonNull;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.IdlingResource;
 import io.reactivex.Scheduler;
 import io.reactivex.functions.Function;
 import java.util.concurrent.Callable;

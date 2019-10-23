@@ -1,11 +1,11 @@
 package com.squareup.rx.idler;
 
-import android.support.annotation.RestrictTo;
-import android.support.test.espresso.Espresso;
+import androidx.annotation.RestrictTo;
+import androidx.test.espresso.Espresso;
 import rx.Scheduler;
 import rx.plugins.RxJavaSchedulersHook;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 @RestrictTo(LIBRARY)
 final class RxIdlerHook extends RxJavaSchedulersHook {
