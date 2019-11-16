@@ -31,9 +31,7 @@ public final class Rx2Idler {
       @Override public Scheduler apply(Callable<Scheduler> delegate) throws Exception {
         IdlingResourceScheduler scheduler =
             new DelegatingIdlingResourceScheduler(delegate.call(), name);
-        IdlingRegistry
-                .getInstance()
-                .register(scheduler);
+        IdlingRegistry.getInstance().register(scheduler);
         return scheduler;
       }
     };
