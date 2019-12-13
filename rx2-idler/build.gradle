@@ -18,6 +18,10 @@ android {
   defaultConfig {
     minSdkVersion versions.minSdk
   }
+
+  libraryVariants.all {
+    it.generateBuildConfigProvider.configure { enabled = false }
+  }
 }
 
 dependencies {
