@@ -119,6 +119,13 @@ public final class DelegatingIdlingResourceSchedulerTest {
     assertIdle(0);
   }
 
+  @Test public void finishingWorkWithoutRegisteredCallbackDoesNotCrash() {
+    IdlingResourceScheduler scheduler = Rx2Idler.wrap(delegate, "Bob");
+    Scheduler.Worker worker = scheduler.createWorker();
+    worker.schedule(new CountingRunnable());
+    delegate.triggerActions();
+  }
+
   private void assertBusy() {
     assertFalse(scheduler.isIdleNow());
   }
