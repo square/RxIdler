@@ -9,6 +9,16 @@ Usage
 
 Set the wrapping functions as the delegate for handling scheduler initialization to RxJava:
 
+ *  RxJava 3.x:
+
+    ```java
+    RxJavaPlugins.setInitComputationSchedulerHandler(
+        Rx3Idler.create("RxJava 3.x Computation Scheduler"));
+    RxJavaPlugins.setInitIoSchedulerHandler(
+        Rx3Idler.create("RxJava 3.x IO Scheduler"));
+    // etc...
+    ```
+
  *  RxJava 2.x:
  
     ```java
@@ -33,7 +43,7 @@ This code is most frequently put in a custom test runner's `onStart()` method:
 public final class MyTestRunner extends AndroidJUnitRunner {
   @Override public void onStart() {
     RxJavaPlugins.setInitComputationSchedulerHandler(
-        Rx2Idler.create("RxJava 2.x Computation Scheduler"));
+        Rx3Idler.create("RxJava 3.x Computation Scheduler"));
     // etc...
     
     super.onStart();
@@ -43,6 +53,14 @@ public final class MyTestRunner extends AndroidJUnitRunner {
 
 If you have custom `Scheduler` implementations you can wrap them directly and then register them
 with Espresso:
+
+ *  RxJava 3.x:
+
+    ```java
+    IdlingResourceScheduler wrapped = Rx3Idler.wrap(myScheduler, "My Scheduler");
+    IdlingRegistry.getInstance().register(wrapped);
+    // Use 'wrapped' now instead of 'myScheduler'...
+    ```
 
  *  RxJava 2.x:
 
@@ -66,11 +84,19 @@ resources registered with the same name.
 Download
 --------
 
+ *  RxJava 3.x:
+
+    ```groovy
+    dependencies {
+      androidTestImplementation 'com.squareup.rx.idler:rx3-idler:0.11.0'
+    }
+    ```
+
  *  RxJava 2.x:
 
     ```groovy
     dependencies {
-      androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.10.0'
+      androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.11.0'
     }
     ```
 
@@ -78,7 +104,7 @@ Download
 
     ```groovy
     dependencies {
-      androidTestImplementation 'com.squareup.rx.idler:rx1-idler:0.10.0'
+      androidTestImplementation 'com.squareup.rx.idler:rx1-idler:0.11.0'
     }
     ```
 
@@ -90,6 +116,11 @@ ProGuard
 
 If you use ProGuard on Espresso test builds, you may need to add the following rules into your ProGuard configuration.
 
+RxJava 3.x:
+```
+-keep class io.reactivex.rxjava3.plugins.RxJavaPlugins { *; }
+-keep class io.reactivex.rxjava3.disposables.CompositeDisposable { *; }
+```
 
 RxJava 2.x:
 ```
