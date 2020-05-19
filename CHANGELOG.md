@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.11.0 *(2020-05-19)*
+----------------------------
+
+ * New: RxJava3 artifact
+ * Fix: stopWork() crashes when attempting to call onTransitionToIdle()
+
 Version 0.10.0 *(2019-11-22)*
 ----------------------------
 
