@@ -1,5 +1,6 @@
 package com.squareup.rx.idler;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -16,7 +17,7 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
   private final Scheduler delegate;
   private final String name;
   private final AtomicInteger work = new AtomicInteger();
-  private ResourceCallback callback;
+  @Nullable private ResourceCallback callback;
 
   DelegatingIdlingResourceScheduler(Scheduler delegate, String name) {
     this.delegate = delegate;
@@ -96,7 +97,7 @@ final class DelegatingIdlingResourceScheduler extends IdlingResourceScheduler {
   }
 
   void stopWork() {
-    if (work.decrementAndGet() == 0) {
+    if (work.decrementAndGet() == 0 && callback != null) {
       callback.onTransitionToIdle();
     }
   }
