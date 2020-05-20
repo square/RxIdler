@@ -1,2 +1,3 @@
 include ':rx1-idler'
 include ':rx2-idler'
+include ':rx3-idler'
