@@ -3,6 +3,9 @@ RxIdler
 
 An `IdlingResource` for Espresso which wraps an RxJava `Scheduler`.
 
+**Attention**: This library is deprecated.
+Please see [Google's updated documentation](https://developer.android.com/training/testing/instrumented-tests/stability#prevent-synchronization) on using wait-based conditions for ensuring UI test stability.
+
 
 Usage
 -----
