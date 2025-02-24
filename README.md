@@ -41,7 +41,7 @@ Set the wrapping functions as the delegate for handling scheduler initialization
 When that `Scheduler` is first accessed via `Schedulers`, the RxIdler function will wrap it with an
 Espresso `IdlingResource` and side-effect by registering it to the `Espresso` class.
 
-This code is most frequently put in a custom test runner's `onCreate()` method (this is called before the app's onCreate is called):
+This code is most frequently put in a custom test runner's `onCreate()` (this is called before the application `onCreate`):
 ```java
 public final class MyTestRunner extends AndroidJUnitRunner {
   @Override public void onCreate() {
